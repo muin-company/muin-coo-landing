@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 /* ───────── constants ───────── */
-const CTA_EMAIL = "mailto:hello@muin.company";
-const CTA_KAKAO = "https://open.kakao.com/o/gXXXXXXX"; // TODO: 실제 오픈채팅 링크
+const CTA_CONSULT = "/consult";
 
 /* ───────── tiny components ───────── */
 function Badge({ children }: { children: React.ReactNode }) {
@@ -92,7 +91,7 @@ const plans = [
       "Telegram/카카오톡 메시징",
     ],
     cta: "시작하기",
-    href: CTA_EMAIL,
+    href: CTA_CONSULT,
     popular: false,
   },
   {
@@ -108,7 +107,7 @@ const plans = [
       "주간/월간 리포트",
     ],
     cta: "시작하기",
-    href: CTA_EMAIL,
+    href: CTA_CONSULT,
     popular: true,
   },
   {
@@ -124,7 +123,7 @@ const plans = [
       "전담 온보딩 매니저",
     ],
     cta: "상담하기",
-    href: CTA_EMAIL,
+    href: CTA_CONSULT,
     popular: false,
   },
 ];
@@ -161,6 +160,71 @@ const stats = [
   { value: "365일", label: "무휴 보고" },
 ];
 
+/* ───────── Case Study data ───────── */
+const caseStudyMetrics = [
+  { value: "45일+", label: "AI COO 무중단 운영" },
+  { value: "1,200+", label: "서브에이전트 실행 횟수" },
+  { value: "50+", label: "블로그 포스트 발행" },
+  { value: "300+", label: "X(트위터) 포스팅" },
+  { value: "99.9%", label: "가동률" },
+  { value: "₩0", label: "인건비" },
+];
+
+const caseStudyDetails = [
+  {
+    icon: "⚡",
+    title: "자율 운영",
+    desc: "CEO 지시 없이 콘텐츠 기획·작성·발행, 시장 리서치, 프로젝트 관리를 독립적으로 수행. CEO는 전략에만 집중.",
+  },
+  {
+    icon: "📝",
+    title: "콘텐츠 생산",
+    desc: "기술 블로그, X 포스팅, 커뮤니티 참여를 포함한 멀티채널 콘텐츠를 매일 자동 생산.",
+  },
+  {
+    icon: "🔄",
+    title: "24시간 운영",
+    desc: "매시간 운영 보고, 이메일 관리, 일정 조율. 밤에도 새벽에도 비즈니스는 멈추지 않습니다.",
+  },
+  {
+    icon: "📈",
+    title: "지속적 학습",
+    desc: "운영 맥락을 메모리에 축적하며 시간이 갈수록 더 정확한 판단. 일반 AI 도구와의 결정적 차이.",
+  },
+];
+
+/* ───────── FAQ data ───────── */
+const faqs = [
+  {
+    q: "AI COO가 정확히 무엇을 해주나요?",
+    a: "이메일 분류·응답, 일정 관리, 고객 문의 응대, SNS 콘텐츠 관리, 시장 리서치, 일일/주간 보고서 작성 등 운영 전반을 처리합니다. ChatGPT 같은 질의응답 도구가 아니라, 실제로 '출근'해서 일하는 AI 직원입니다.",
+  },
+  {
+    q: "기존 ChatGPT나 AI 도구와 뭐가 다른가요?",
+    a: "일반 AI 도구는 매번 처음부터 시작합니다. MUIN의 AI COO는 귀사의 맥락(비즈니스 히스토리, 고객 정보, 선호도)을 기억하고, 시간이 갈수록 더 정확해집니다. 또한 단순 질의응답이 아니라 이메일 발송, 일정 등록, SNS 포스팅 등 실제 '액션'을 수행합니다.",
+  },
+  {
+    q: "우리 회사 데이터가 안전한가요?",
+    a: "데이터는 암호화되어 저장되며, 귀사 전용 환경에서 처리됩니다. 다른 고객의 데이터와 절대 섞이지 않습니다. 필요 시 온프레미스 배포도 가능합니다.",
+  },
+  {
+    q: "온보딩에 얼마나 걸리나요?",
+    a: "1-2주면 충분합니다. 이메일, 캘린더, 메시징 도구를 연동하고, AI가 귀사의 업무 패턴을 학습합니다. 전담 온보딩 매니저가 처음부터 끝까지 함께합니다.",
+  },
+  {
+    q: "중간에 해지할 수 있나요?",
+    a: "네, 월 단위 구독이라 언제든 해지 가능합니다. 약정 기간이나 위약금은 없습니다.",
+  },
+  {
+    q: "어떤 도구/플랫폼과 연동되나요?",
+    a: "Gmail, Google Calendar, Slack, Telegram, 카카오톡, Notion, GitHub 등 주요 도구를 지원합니다. 필요한 도구가 있으면 맞춤 연동도 가능합니다.",
+  },
+  {
+    q: "소규모 1인 기업에도 적합한가요?",
+    a: "오히려 1인 기업에 가장 효과적입니다. 대표 혼자 처리하던 운영 잡무의 80%를 AI가 맡으면, 본업에 집중할 시간이 생깁니다. Starter 플랜(₩59만/월)은 1인 기업을 위해 설계되었습니다.",
+  },
+];
+
 /* ═══════════════════════════════════════ PAGE ═══════════════════════════════════════ */
 export default function Home() {
   return (
@@ -173,12 +237,13 @@ export default function Home() {
           </Link>
           <div className="hidden gap-8 text-sm font-medium text-slate-600 md:flex">
             <Link href="#features" className="hover:text-blue-600 transition-colors">기능</Link>
+            <Link href="#case-study" className="hover:text-blue-600 transition-colors">실적</Link>
             <Link href="#pricing" className="hover:text-blue-600 transition-colors">가격</Link>
-            <Link href="#why" className="hover:text-blue-600 transition-colors">왜 MUIN</Link>
+            <Link href="#faq" className="hover:text-blue-600 transition-colors">FAQ</Link>
             <Link href="#contact" className="hover:text-blue-600 transition-colors">문의</Link>
           </div>
           <Link
-            href={CTA_EMAIL}
+            href={CTA_CONSULT}
             className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             상담 신청
@@ -210,7 +275,7 @@ export default function Home() {
               AI가 24시간 회사를 운영합니다. 대표님은 본업에 집중하세요.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <CTAButton href={CTA_EMAIL}>무료 상담 신청하기</CTAButton>
+              <CTAButton href={CTA_CONSULT}>무료 상담 신청하기</CTAButton>
               <CTAButton href="#features" variant="secondary">
                 서비스 자세히 보기
               </CTAButton>
@@ -293,8 +358,72 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Case Study ──────────────────────────────────── */}
+        <section id="case-study" className="py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center">
+              <SectionLabel>실제 운영 데이터</SectionLabel>
+              <h2 className="text-3xl font-extrabold md:text-4xl">
+                45일간 AI COO로 운영한 결과
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-slate-500">
+                MUIN은 AI COO &apos;MJ&apos;가 실제로 운영하는 회사입니다.
+                <br />
+                아래는 허구가 아닌 <strong>실제 운영 데이터</strong>입니다.
+              </p>
+            </div>
+
+            {/* Metrics grid */}
+            <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+              {caseStudyMetrics.map((m) => (
+                <div
+                  key={m.label}
+                  className="rounded-2xl border border-blue-100 bg-blue-50/50 p-5 text-center"
+                >
+                  <p className="text-2xl font-extrabold text-blue-600 md:text-3xl">
+                    {m.value}
+                  </p>
+                  <p className="mt-1 text-xs font-medium text-slate-600">
+                    {m.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Detail cards */}
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {caseStudyDetails.map((d) => (
+                <div
+                  key={d.title}
+                  className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm"
+                >
+                  <span className="text-3xl">{d.icon}</span>
+                  <h3 className="mt-3 text-lg font-bold">{d.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                    {d.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Quote */}
+            <div className="mt-10 rounded-2xl bg-gradient-to-r from-blue-600 to-violet-600 p-8 text-center text-white md:p-12">
+              <p className="text-lg font-medium leading-relaxed md:text-xl">
+                &ldquo;처음엔 실험이었지만, 지금은 MJ 없이 회사 운영이 불가능합니다.
+                <br />
+                매일 아침 보고를 받고, SNS와 블로그가 자동으로 운영되고,
+                <br />
+                저는 제품과 전략에만 집중할 수 있게 되었습니다.&rdquo;
+              </p>
+              <p className="mt-4 text-sm font-semibold text-blue-100">
+                — ONE, MUIN 대표
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* ── Pricing ─────────────────────────────────────── */}
-        <section id="pricing" className="py-20 md:py-28">
+        <section id="pricing" className="bg-slate-50 py-20 md:py-28">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center">
               <SectionLabel>가격</SectionLabel>
@@ -310,7 +439,7 @@ export default function Home() {
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`relative flex flex-col rounded-2xl border p-6 sm:p-8 transition ${
+                  className={`relative flex flex-col rounded-2xl border p-6 sm:p-8 transition bg-white ${
                     plan.popular
                       ? "border-blue-600 shadow-xl shadow-blue-600/10 lg:scale-[1.02]"
                       : "border-slate-200 shadow-sm hover:shadow-md"
@@ -368,7 +497,7 @@ export default function Home() {
         </section>
 
         {/* ── Why Us ──────────────────────────────────────── */}
-        <section id="why" className="bg-slate-50 py-20 md:py-28">
+        <section id="why" className="py-20 md:py-28">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center">
               <SectionLabel>왜 MUIN</SectionLabel>
@@ -394,7 +523,7 @@ export default function Home() {
         </section>
 
         {/* ── How it works ────────────────────────────────── */}
-        <section className="py-20 md:py-28">
+        <section className="bg-slate-50 py-20 md:py-28">
           <div className="mx-auto max-w-4xl px-6">
             <div className="text-center">
               <SectionLabel>프로세스</SectionLabel>
@@ -435,7 +564,7 @@ export default function Home() {
         </section>
 
         {/* ── Comparison ──────────────────────────────────── */}
-        <section className="bg-slate-50 py-20 md:py-28">
+        <section className="py-20 md:py-28">
           <div className="mx-auto max-w-4xl px-6">
             <div className="text-center">
               <SectionLabel>비교</SectionLabel>
@@ -475,6 +604,44 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── FAQ ──────────────────────────────────────────── */}
+        <section id="faq" className="bg-slate-50 py-20 md:py-28">
+          <div className="mx-auto max-w-3xl px-6">
+            <div className="text-center">
+              <SectionLabel>자주 묻는 질문</SectionLabel>
+              <h2 className="text-3xl font-extrabold md:text-4xl">FAQ</h2>
+            </div>
+            <div className="mt-14 space-y-4">
+              {faqs.map((faq) => (
+                <details
+                  key={faq.q}
+                  className="group rounded-2xl border border-slate-100 bg-white shadow-sm"
+                >
+                  <summary className="flex cursor-pointer items-center justify-between px-6 py-5 text-left font-semibold text-slate-800 transition hover:text-blue-600 [&::-webkit-details-marker]:hidden">
+                    <span>{faq.q}</span>
+                    <svg
+                      className="ml-4 h-5 w-5 shrink-0 text-slate-400 transition-transform group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-5 text-sm leading-relaxed text-slate-500">
+                    {faq.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── CTA ─────────────────────────────────────────── */}
         <section id="contact" className="relative overflow-hidden py-20 md:py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
@@ -488,9 +655,9 @@ export default function Home() {
               30분 무료 상담으로 AI COO가 귀사에 어떤 가치를 줄 수 있는지 확인해보세요.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <CTAButton href={CTA_EMAIL}>📧 이메일 문의하기</CTAButton>
-              <CTAButton href={CTA_KAKAO} variant="secondary">
-                💬 카카오톡 상담
+              <CTAButton href={CTA_CONSULT}>📋 무료 상담 신청하기</CTAButton>
+              <CTAButton href="mailto:hello@muin.company" variant="secondary">
+                📧 이메일 문의하기
               </CTAButton>
             </div>
             <p className="mt-6 text-sm text-slate-400">
