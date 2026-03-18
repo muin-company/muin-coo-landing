@@ -310,9 +310,9 @@ export default function Home() {
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`relative flex flex-col rounded-2xl border p-8 transition ${
+                  className={`relative flex flex-col rounded-2xl border p-6 sm:p-8 transition ${
                     plan.popular
-                      ? "border-blue-600 shadow-xl shadow-blue-600/10 scale-[1.02]"
+                      ? "border-blue-600 shadow-xl shadow-blue-600/10 lg:scale-[1.02]"
                       : "border-slate-200 shadow-sm hover:shadow-md"
                   }`}
                 >
@@ -443,8 +443,8 @@ export default function Home() {
                 인간 COO vs AI COO
               </h2>
             </div>
-            <div className="mt-12 overflow-x-auto">
-              <table className="w-full text-left text-sm">
+            <div className="mt-12 overflow-x-auto -mx-6 px-6">
+              <table className="w-full min-w-[540px] text-left text-sm">
                 <thead>
                   <tr className="border-b-2 border-slate-200">
                     <th className="py-4 pr-4 font-semibold text-slate-500">항목</th>
@@ -463,10 +463,10 @@ export default function Home() {
                     ["한국어/한국 시장", "✅ 네이티브", "✅", "보통"],
                   ].map(([label, ai, human, va]) => (
                     <tr key={label}>
-                      <td className="py-3.5 pr-4 font-medium text-slate-700">{label}</td>
-                      <td className="py-3.5 px-4 font-semibold text-blue-600">{ai}</td>
-                      <td className="py-3.5 px-4 text-slate-500">{human}</td>
-                      <td className="py-3.5 pl-4 text-slate-500">{va}</td>
+                      <td className="py-3.5 pr-4 font-medium text-slate-700 whitespace-nowrap">{label}</td>
+                      <td className="py-3.5 px-4 font-semibold text-blue-600 whitespace-nowrap">{ai}</td>
+                      <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">{human}</td>
+                      <td className="py-3.5 pl-4 text-slate-500 whitespace-nowrap">{va}</td>
                     </tr>
                   ))}
                 </tbody>
