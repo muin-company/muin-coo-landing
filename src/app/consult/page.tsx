@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 
 const tiers = [
   { value: "starter", label: "Starter (₩59만/월)" },
@@ -12,6 +13,8 @@ const tiers = [
 
 export default function ConsultPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -20,19 +23,37 @@ export default function ConsultPage() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    setError("");
 
-    const subject = encodeURIComponent(
-      `[AI COO 상담 신청] ${form.company} - ${form.name}`
-    );
-    const body = encodeURIComponent(
-      `이름: ${form.name}\n이메일: ${form.email}\n회사명: ${form.company}\n관심 티어: ${tiers.find((t) => t.value === form.tier)?.label || form.tier}\n\n추가 메시지:\n${form.message}`
-    );
+    try {
+      const res = await fetch("/api/consult", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    // Open mailto and show success
-    window.location.href = `mailto:hello@muin.company?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
+        setSubmitting(false);
+        return;
+      }
+
+      // Track successful conversion
+      track("consult_submit", {
+        tier: form.tier,
+        has_message: form.message.length > 0 ? "yes" : "no",
+      });
+
+      setSubmitted(true);
+    } catch {
+      setError("네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.");
+      setSubmitting(false);
+    }
   };
 
   const update = (field: string, value: string) =>
@@ -55,9 +76,9 @@ export default function ConsultPage() {
             </div>
             <h1 className="mt-6 text-3xl font-extrabold">신청 완료!</h1>
             <p className="mt-4 text-slate-600">
-              이메일 클라이언트가 열렸습니다. 전송을 완료해주세요.
+              상담 신청이 성공적으로 접수되었습니다.
               <br />
-              <strong>24시간 이내</strong>에 회신드리겠습니다.
+              <strong>24시간 이내</strong>에 입력하신 이메일로 회신드리겠습니다.
             </p>
             <Link
               href="/"
@@ -200,11 +221,18 @@ export default function ConsultPage() {
               />
             </div>
 
+            {error && (
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-xl bg-blue-600 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 hover:-translate-y-0.5"
+              disabled={submitting}
+              className="w-full rounded-xl bg-blue-600 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
-              무료 상담 신청하기 →
+              {submitting ? "전송 중..." : "무료 상담 신청하기 →"}
             </button>
 
             <p className="text-center text-xs text-slate-400">

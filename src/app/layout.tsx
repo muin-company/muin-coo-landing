@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description:
     "이메일, 일정, 고객 관리, 보고서 — AI가 24시간 회사를 운영합니다. 인간 COO 대비 75-90% 비용 절감.",
   keywords: "AI COO, AI 비서, 무인기업, 운영 자동화, 1인 창업자, 소규모 팀",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || "GOOGLE_VERIFICATION_CODE",
+  },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
