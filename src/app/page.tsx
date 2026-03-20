@@ -74,6 +74,21 @@ const features = [
     title: "프로젝트 관리",
     desc: "태스크 추적, 마감일 알림, 진행 상황 요약까지 한번에.",
   },
+  {
+    icon: "🎭",
+    title: "SOUL.md — 즉시 온보딩",
+    desc: "AI의 페르소나·가치관·업무 스타일을 한 파일로 정의합니다. 새 직원 교육 없이 '캐릭터'가 즉시 세팅됩니다.",
+  },
+  {
+    icon: "🧠",
+    title: "MEMORY.md — 장기 기억",
+    desc: "대화·학습·의사결정 맥락이 영속됩니다. 챗봇처럼 매번 처음부터가 아니라, 쌓인 기억 위에서 판단합니다.",
+  },
+  {
+    icon: "🌐",
+    title: "멀티채널 동시 운영",
+    desc: "Telegram, Slack, Discord, 이메일, WhatsApp — 채널마다 따로 사람을 둘 필요 없이 하나의 AI가 전부 커버합니다.",
+  },
 ];
 
 /* ───────── Pricing data ───────── */
@@ -565,42 +580,56 @@ export default function Home() {
 
         {/* ── Comparison ──────────────────────────────────── */}
         <section className="py-20 md:py-28">
-          <div className="mx-auto max-w-4xl px-6">
+          <div className="mx-auto max-w-5xl px-6">
             <div className="text-center">
               <SectionLabel>비교</SectionLabel>
               <h2 className="text-3xl font-extrabold md:text-4xl">
-                인간 COO vs AI COO
+                왜 MUIN AI COO인가?
               </h2>
+              <p className="mx-auto mt-3 max-w-xl text-slate-500">
+                인간 COO, 가상 비서, 그리고 한국 시장 AI 서비스와의 솔직한 비교.
+              </p>
             </div>
             <div className="mt-12 overflow-x-auto -mx-6 px-6">
-              <table className="w-full min-w-[540px] text-left text-sm">
+              <table className="w-full min-w-[700px] text-left text-sm">
                 <thead>
                   <tr className="border-b-2 border-slate-200">
                     <th className="py-4 pr-4 font-semibold text-slate-500">항목</th>
                     <th className="py-4 px-4 font-semibold text-blue-600">MUIN AI COO</th>
                     <th className="py-4 px-4 font-semibold text-slate-500">인간 COO</th>
-                    <th className="py-4 pl-4 font-semibold text-slate-500">가상 비서</th>
+                    <th className="py-4 px-4 font-semibold text-slate-500">가상 비서</th>
+                    <th className="py-4 px-4 font-semibold text-slate-500">뤼튼</th>
+                    <th className="py-4 pl-4 font-semibold text-slate-500">클로바X</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {[
-                    ["월 비용", "₩59-199만", "₩500만+", "₩150-300만"],
-                    ["가용 시간", "24/7/365", "주 40-50시간", "주 20-40시간"],
-                    ["온보딩 기간", "1-2주", "1-3개월", "2-4주"],
-                    ["맥락 유지", "영구 (메모리)", "퇴사 시 유실", "제한적"],
-                    ["운영 판단", "✅ 학습 기반", "✅ 경험 기반", "❌ 지시 실행"],
-                    ["한국어/한국 시장", "✅ 네이티브", "✅", "보통"],
-                  ].map(([label, ai, human, va]) => (
+                    ["월 비용", "₩59-199만", "₩500만+", "₩150-300만", "무료/₩1.3만", "무료"],
+                    ["가용 시간", "24/7/365", "주 40-50시간", "주 20-40시간", "24/7", "24/7"],
+                    ["온보딩 기간", "1-2주", "1-3개월", "2-4주", "즉시", "즉시"],
+                    ["맥락 유지", "✅ 영구 (MEMORY.md)", "퇴사 시 유실", "제한적", "❌ 세션 초기화", "❌ 세션 초기화"],
+                    ["업무 실행", "✅ 이메일·SNS·배포", "✅ 전문가 수준", "✅ 지시 실행", "❌ 텍스트 생성만", "❌ 텍스트 생성만"],
+                    ["자율 판단", "✅ 능동적 보고·실행", "✅ 경험 기반", "❌ 수동 대기", "❌ 질문-응답만", "❌ 질문-응답만"],
+                    ["캐릭터 세팅", "✅ SOUL.md 즉시 정의", "채용·적응 필요", "교육 필요", "❌ 없음", "❌ 없음"],
+                    ["멀티채널 운영", "✅ Telegram·Slack·Discord 등", "플랫폼별 따로", "1-2채널", "❌ 웹 챗만", "❌ 웹/앱만"],
+                    ["확장성", "✅ 서브에이전트 즉시", "추가 채용", "추가 인원", "❌ 1:1 채팅", "❌ 1:1 채팅"],
+                    ["한국어/한국 시장", "✅ 네이티브", "✅", "보통", "✅", "✅"],
+                  ].map(([label, ai, human, va, wrtn, clova]) => (
                     <tr key={label}>
                       <td className="py-3.5 pr-4 font-medium text-slate-700 whitespace-nowrap">{label}</td>
                       <td className="py-3.5 px-4 font-semibold text-blue-600 whitespace-nowrap">{ai}</td>
                       <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">{human}</td>
-                      <td className="py-3.5 pl-4 text-slate-500 whitespace-nowrap">{va}</td>
+                      <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">{va}</td>
+                      <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">{wrtn}</td>
+                      <td className="py-3.5 pl-4 text-slate-500 whitespace-nowrap">{clova}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            <p className="mt-6 text-center text-sm text-slate-400">
+              뤼튼·클로바X는 텍스트를 &ldquo;생성&rdquo;하는 챗봇 — MUIN AI COO는 업무를 &ldquo;실행&rdquo;하는 AI 직원입니다.
+            </p>
           </div>
         </section>
 
