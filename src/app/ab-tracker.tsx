@@ -1,0 +1,12 @@
+"use client";
+
+import { useEffect } from "react";
+import { track } from "@vercel/analytics";
+
+export function ABTracker({ variant }: { variant: string }) {
+  useEffect(() => {
+    track("ab_headline_view", { variant });
+  }, [variant]);
+
+  return null;
+}

@@ -29,10 +29,17 @@ export default function ConsultPage() {
     setError("");
 
     try {
+      // Read A/B variant from cookie for API tracking
+      const abCookie =
+        document.cookie
+          .split("; ")
+          .find((c) => c.startsWith("ab-headline="))
+          ?.split("=")[1] || "unknown";
+
       const res = await fetch("/api/consult", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ab_variant: abCookie }),
       });
 
       const data = await res.json();
@@ -43,10 +50,18 @@ export default function ConsultPage() {
         return;
       }
 
-      // Track successful conversion
+      // Read A/B variant from cookie
+      const abVariant =
+        document.cookie
+          .split("; ")
+          .find((c) => c.startsWith("ab-headline="))
+          ?.split("=")[1] || "unknown";
+
+      // Track successful conversion with variant info
       track("consult_submit", {
         tier: form.tier,
         has_message: form.message.length > 0 ? "yes" : "no",
+        ab_headline: abVariant,
       });
 
       setSubmitted(true);

@@ -10,7 +10,7 @@ const TIERS: Record<string, string> = {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, company, tier, message } = body;
+    const { name, email, company, tier, message, ab_variant } = body;
 
     // Validate required fields
     if (!name || !email || !company || !tier) {
@@ -44,6 +44,7 @@ export async function POST(request: Request) {
         company,
         tier: tierLabel,
         message: message || "(없음)",
+        ab_variant: ab_variant || "unknown",
         _subject: `[AI COO 상담 신청] ${company} - ${name}`,
         _replyto: email,
       }),

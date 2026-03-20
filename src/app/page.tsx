@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { ABTracker } from "./ab-tracker";
 
 /* ───────── constants ───────── */
 const CTA_CONSULT = "/consult";
@@ -240,10 +242,23 @@ const faqs = [
   },
 ];
 
+/* ───────── A/B headline variants ───────── */
+const HEADLINES: Record<string, { line1: string; highlight: string; line1Suffix: string }> = {
+  a: { line1: "당신의 회사에", highlight: "AI 임원", line1Suffix: "을 심어드립니다." },
+  b: { line1: "월 59만원으로", highlight: "24시간 일하는 COO", line1Suffix: "를 고용하세요." },
+};
+
 /* ═══════════════════════════════════════ PAGE ═══════════════════════════════════════ */
-export default function Home() {
+export default async function Home() {
+  const cookieStore = await cookies();
+  const variant = cookieStore.get("ab-headline")?.value || "a";
+  const headline = HEADLINES[variant] || HEADLINES.a;
+
   return (
     <>
+      {/* A/B variant tracker — fires event on mount */}
+      <ABTracker variant={variant} />
+
       {/* ── Nav ────────────────────────────────────────── */}
       <nav className="fixed top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-lg">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -278,12 +293,12 @@ export default function Home() {
           <div className="mx-auto max-w-4xl px-6 text-center">
             <Badge>🚀 첫 10팀 셋업비 무료</Badge>
             <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl md:leading-[1.1]">
-              당신의 회사에
+              {headline.line1}
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                AI 임원
+                {headline.highlight}
               </span>
-              을 심어드립니다.
+              {headline.line1Suffix}
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600 md:text-xl">
               이메일, 일정, 고객 관리, 보고서 —<br className="hidden sm:block" />
