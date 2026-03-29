@@ -224,7 +224,7 @@ export default function ConsultPage() {
                 className="block text-sm font-semibold text-slate-700"
               >
                 추가 메시지{" "}
-                <span className="text-slate-400 font-normal">(선택)</span>
+                <span className="text-slate-500 font-normal">(선택)</span>
               </label>
               <textarea
                 id="message"
@@ -250,7 +250,7 @@ export default function ConsultPage() {
               {submitting ? "전송 중..." : "무료 상담 신청하기 →"}
             </button>
 
-            <p className="text-center text-xs text-slate-400">
+            <p className="text-center text-xs text-slate-500">
               24시간 이내에 회신드립니다. 정보는 상담 목적으로만 사용됩니다.
             </p>
           </form>

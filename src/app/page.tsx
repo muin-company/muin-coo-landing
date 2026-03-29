@@ -520,7 +520,7 @@ export default async function Home() {
               ))}
             </div>
 
-            <p className="mt-10 text-center text-sm text-slate-400">
+            <p className="mt-10 text-center text-sm text-slate-500">
               🎁 지금 신청 시 셋업비(₩100만) 무료 · 부가세 별도
             </p>
           </div>
@@ -642,7 +642,7 @@ export default async function Home() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-6 text-center text-sm text-slate-400">
+            <p className="mt-6 text-center text-sm text-slate-500">
               뤼튼·클로바X는 텍스트를 &ldquo;생성&rdquo;하는 챗봇 — MUIN AI COO는 업무를 &ldquo;실행&rdquo;하는 AI 직원입니다.
             </p>
           </div>
@@ -704,7 +704,7 @@ export default async function Home() {
                 📧 이메일 문의하기
               </CTAButton>
             </div>
-            <p className="mt-6 text-sm text-slate-400">
+            <p className="mt-6 text-sm text-slate-500">
               hello@muin.company · @muincompany
             </p>
           </div>
@@ -717,7 +717,7 @@ export default async function Home() {
           <p className="text-sm font-semibold text-slate-900">
             MUIN<span className="text-blue-600">.</span>
           </p>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 text-xs text-slate-500">
             일하는 AI, 누리는 인간. © 2026 MUIN. All rights reserved.
           </p>
         </div>
