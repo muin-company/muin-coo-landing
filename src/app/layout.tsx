@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { PostHogProvider } from "./posthog-provider";
 import "./globals.css";
 
 const siteUrl = "https://muin-coo-landing.vercel.app";
@@ -66,7 +67,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-white text-slate-900 antialiased">
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
         <Analytics />
       </body>
     </html>
